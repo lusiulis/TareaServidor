@@ -10,11 +10,11 @@ import java.util.Observer;
 import javax.swing.JFrame;
 import tareaservidor.control.GestorServidor;
 
-public class VentanaJuegoServidor extends JFrame implements Observer{
+public class VentanaJuegoServidor extends JFrame implements Observer {
 
     private GestorServidor gestor;
     private Casilla casillas[][];
-    
+
     public VentanaJuegoServidor(GestorServidor gestor) {
         super("Connect 4 - Servidor");
         this.gestor = gestor;
@@ -23,7 +23,12 @@ public class VentanaJuegoServidor extends JFrame implements Observer{
 
     @Override
     public void update(Observable o, Object o1) {
-        
+        if (o1 instanceof String) {
+            //poner el mensaje en barra de estado abajo
+        }
+        if (o1 instanceof Casilla[][]) {
+            //actualizar tablero
+        }
     }
 
     private void configurar() {
@@ -35,11 +40,11 @@ public class VentanaJuegoServidor extends JFrame implements Observer{
     }
 
     private void Ajustar(Container c) {
-        c.setLayout(new GridLayout(8,8));
+        c.setLayout(new GridLayout(8, 8));
         casillas = new Casilla[8][8];
-        for(int i=0;i<8;i++){
-            for(int j=0;j<8;j++){
-                Casilla casilla = new Casilla(j,i);
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                Casilla casilla = new Casilla(j, i);
                 casilla.setBackground(Color.GREEN);
                 casilla.Actualizar();
                 AgregarEscucha(casilla);
@@ -48,21 +53,21 @@ public class VentanaJuegoServidor extends JFrame implements Observer{
             }
         }
     }
-    
-    private void AgregarEscucha(Casilla casilla){
+
+    private void AgregarEscucha(Casilla casilla) {
         casilla.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e){
-                if(!casilla.isClick()){
-                    gestor.mandarPorSocket(casilla.getPosx()+","+casilla.getPosy());
+            public void mouseClicked(MouseEvent e) {
+                if (!casilla.isClick()) {
+                    gestor.pintar(casilla.getPosx(), casilla.getPosy());
                 }
             }
         });
     }
-    
-    public void init(){
+
+    public void init() {
         gestor.registrar(this);
         setVisible(true);
     }
-    
+
 }

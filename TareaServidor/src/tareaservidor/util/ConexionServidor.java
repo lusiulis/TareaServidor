@@ -36,7 +36,7 @@ public class ConexionServidor extends Thread {
             try {
                 while (ModeloServidor.continuar) {
                     ConexionServidor conexion;
-                    conexion = new ConexionServidor(serverSocket.accept(),gestor);
+                    conexion = new ConexionServidor(serverSocket.accept(), gestor);
                     conexion.start();
                 }
                 serverSocket.close();
@@ -49,10 +49,9 @@ public class ConexionServidor extends Thread {
                 String mensajeRecibido = new BufferedReader(new InputStreamReader(socket.getInputStream())).readLine();
                 if (primeraConexion) {
                     establecerJugadorContrario(mensajeRecibido);
-                } else {
-                    String[] posicion = mensajeRecibido.split(",");
-                    gestor.pintar(Integer.valueOf(posicion[0]), Integer.valueOf(posicion[1]));
                 }
+                String[] posicion = mensajeRecibido.split(",");
+                gestor.pintarOponente(Integer.valueOf(posicion[0]), Integer.valueOf(posicion[1]));
 
             } catch (Exception ex) {
             }
