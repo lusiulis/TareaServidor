@@ -8,14 +8,16 @@ import java.awt.event.MouseEvent;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JFrame;
-import tareaservidor.Casilla;
+import tareaservidor.control.GestorServidor;
 
-public class VentanaJuego extends JFrame implements Observer{
+public class VentanaJuegoServidor extends JFrame implements Observer{
 
+    private GestorServidor gestor;
     private Casilla casillas[][];
     
-    public VentanaJuego() {
-        super("Juego");
+    public VentanaJuegoServidor(GestorServidor gestor) {
+        super("Connect 4 - Servidor");
+        this.gestor = gestor;
         configurar();
     }
 
@@ -52,13 +54,14 @@ public class VentanaJuego extends JFrame implements Observer{
             @Override
             public void mouseClicked(MouseEvent e){
                 if(!casilla.isClick()){
-                    System.out.println("x: "+casilla.getPosx()+", y: "+casilla.getPosy());
+                    gestor.mandarPorSocket(casilla.getPosx()+","+casilla.getPosy());
                 }
             }
         });
     }
     
     public void init(){
+        gestor.registrar(this);
         setVisible(true);
     }
     

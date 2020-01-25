@@ -1,12 +1,12 @@
 package tareaservidor;
 
-import tareaserviddor.views.VentanaJuego;
+import tareaservidor.control.GestorServidor;
+import tareaservidor.views.VentanaJuegoServidor;
 
 public class TareaServidor {
 
     public static void main(String[] args) {
-        VentanaJuego ventana = new VentanaJuego();
-        ventana.init();
+        new VentanaJuegoServidor(new GestorServidor()).init();
     }
     
 }

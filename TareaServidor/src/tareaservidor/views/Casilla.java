@@ -1,4 +1,4 @@
-package tareaservidor;
+package tareaservidor.views;
 
 import java.awt.Color;
 import javax.swing.BorderFactory;
