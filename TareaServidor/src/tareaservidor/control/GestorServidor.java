@@ -7,6 +7,7 @@ package tareaservidor.control;
 
 import java.util.Observer;
 import tareaservidor.model.ModeloServidor;
+import tareaservidor.views.Casilla;
 
 /**
  *
@@ -43,6 +44,13 @@ public class GestorServidor {
 
     public void pintarOponente(Integer x, Integer y) {
         modelo.pintarOponente(x, y);
+    }
+    
+    public void setCasilla(int x,int y,Casilla m){
+        modelo.setCasilla(x, y, m);
+    }
 
+    public Casilla[][] getCasillas(){
+        return modelo.getCasillas();
     }
 }
